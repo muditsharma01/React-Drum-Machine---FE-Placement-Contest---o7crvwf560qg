@@ -1,26 +1,24 @@
 import React from "react";
-import {bank1} from "./App"
+import { bank1 } from "./App";
 
-function Pad({ handleClick, power, className, element, id }) {
-  const handlePadClick = () => {
-    if (power) {
-      const audioElement = document.getElementById(element);
-      audioElement.currentTime = 0;
-      audioElement.play();
-      handleClick(id);
-    }
-  };
-
+function Pad({ handleClick, power, element, id }) {
+  const backgroundStyle = power ? "orange" : "gray";
   return (
     <button
       data-tag={id}
       type="button"
-      className={`drum-pad ${className}`}
-      onClick={handlePadClick}
-      id={id}
+      className="drum-pad"
+      onClick={handleClick}
+      id={bank1[element].name}
+      disabled={!power}
+      style={{ background: `${backgroundStyle}` }}
     >
       {element}
-      <audio id={element} src={id} className="clip"></audio>
+      <audio
+        id={element}
+        src={bank1[element].source}
+        className="clip"
+      ></audio>
     </button>
   );
 }
